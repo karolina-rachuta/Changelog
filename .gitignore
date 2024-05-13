@@ -1,4 +1,6 @@
-.vs_code
+.vscode
 .history
 .DS_store
 .idea
+node_modules
+.env

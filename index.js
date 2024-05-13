@@ -1,24 +1,19 @@
-const http = require("http");
+const express = require('express');
+const path = require('path');
 
-const server = http.createServer(async (req, res) => {
-    if (req.url === '/' && req.method === 'GET') {
-        res.writeHead(200, {
-            'Content-Type': 'application/json'
-        });
-        res.write(JSON.stringify({
-            "message": "Hello"
-        }));
-        res.end();
-        return
-    }
-    res.writeHead(404, {
-        'Content-Type': 'application/json'
-    });
-    res.end(JSON.stringify({"message": "not found"}));
+//obiekt reprezentujacy cala aplikacje backendowa
+const app = express();
+
+//wysylanie html, uzycie middleware - zmiana w locie danych pomiedzy a - b
+//pliki static - assets html, css
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    //res.json({ "message" : "hello express"});
+    //zmienna dirname ktora trzyma lokalizacje
+    res.sendFile(path.resolve("pages/index.html"))
 });
 
-
-
-server.listen(3002, () => {
-    console.log("Server started on port 3002")
+app.listen(3002, () => {
+    console.log('Server started on port 3002')
 })
