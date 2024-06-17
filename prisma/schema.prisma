@@ -41,14 +41,13 @@ model Update {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  titile      String
-  body        String
-  status      UPDATE_STATUS @default(IN_PROGRESS)
-  version     String?
-  asset       String?
-  productId   String
-  product     Product       @relation(fields: [productId], references: [id])
-  UpdatePoint UpdatePoint[]
+  titile    String
+  body      String
+  status    UPDATE_STATUS @default(IN_PROGRESS)
+  version   String?
+  asset     String?
+  productId String
+  product   Product       @relation(fields: [productId], references: [id])
 }
 
 model UpdatePoint {
@@ -56,8 +55,8 @@ model UpdatePoint {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String @db.VarChar(255)
+  name String @db.VarChar(255)
   description String
-  updateId    String
-  update      Update @relation(fields: [updateId], references: [id])
+  updateId String
+  update Update @relation(fields: [updateId], references: [id])
 }
