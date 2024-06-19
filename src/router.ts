@@ -1,16 +1,27 @@
 import { Router } from "express";
+import { getProducts, getProduct, createProduct, deleteProduct, updateProduct } from "./handlers/products";
+import { body } from "express-validator";
+import {handleInputErrors} from './modules/middleware';
 
 const router = Router();
 
-router.get('/products', (req, res) => {
-    console.log('trafione');
-    res.json({"message":  'Hello World'})
-});
-router.get('/products/:id', () => {});
-router.post('/products', () => {});
-router.put('/products/', () => {});
-router.put('/products/:id', () => {});
-router.delete('/products/:id', () => {});
+router.get('/products', getProducts);
+router.get('/products/:id', getProduct);
+
+router.post(
+    '/products',
+    body('name').isString(),
+    handleInputErrors,
+    createProduct);
+
+
+router.put(
+    '/products/:id',
+    body('name').isString(),
+    handleInputErrors,
+    updateProduct);
+
+router.delete('/products/:id', deleteProduct);
 
 
 
